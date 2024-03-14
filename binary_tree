@@ -1,0 +1,43 @@
+class newNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def iterativeSearch(root, key):
+    while root is not None:
+        if key > root.data:
+            root = root.right
+        elif key < root.data:
+            root = root.left
+        else:
+            return True
+    return False
+
+def insert(Node, data):
+    if Node is None:
+        return newNode(data)
+    if data < Node.data:
+        Node.left = insert(Node.left, data)
+    elif data > Node.data:
+        Node.right = insert(Node.right, data)
+    return Node
+
+if __name__ == '__main__':
+    root = None
+    while True:
+        choice = input("Enter 'i' to insert a node, 's' to search for a key, or 'q' to quit: ").lower()
+        
+        if choice == 'i':
+            data = int(input("Enter data for the new node: "))
+            root = insert(root, data)
+        elif choice == 's':
+            key = int(input("Enter the key to search: "))
+            if iterativeSearch(root, key):
+                print("Yes")
+            else:
+                print("No")
+        elif choice == 'q':
+            break
+        else:
+            print("Invalid choice. Please enter 'i', 's', or 'q'.")
